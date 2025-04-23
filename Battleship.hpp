@@ -1,10 +1,5 @@
 #pragma once
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
-#include <ctime>
-#include <cstdlib>
+#include "libraries.hpp"
 
 constexpr int BOARD_SIZE = 10;
 
@@ -28,7 +23,6 @@ public:
     Battleship();
     void play();
 
-private:
     std::vector<std::vector<char>> playerBoard;
     std::vector<std::vector<char>> computerBoard;
     Stats playerStats, computerStats;
