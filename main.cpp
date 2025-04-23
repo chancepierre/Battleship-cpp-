@@ -6,11 +6,11 @@ const int CELL_SIZE = 50;
 int main()
 {
     Battleship game;
+    bool showMenu = true;
+    bool playerTurn = true;
+    bool gameOver = false;
  
-    game.randomlyPlaceShips(game.playerBoard);
-    game.randomlyPlaceShips(game.computerBoard); 
- 
-    sf::RenderWindow window(sf::VideoMode(CELL_SIZE * BOARD_SIZE, CELL_SIZE * BOARD_SIZE + 80), "Battleship - Player vs Player");
+    sf::RenderWindow window(sf::VideoMode(CELL_SIZE * BOARD_SIZE, CELL_SIZE * BOARD_SIZE + 100), "Battleship - Player vs Player");
     window.setFramerateLimit(60);
  
     sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
@@ -19,9 +19,7 @@ int main()
  
     sf::Font font;
     if (!font.loadFromFile("arial.ttf"))
-    {
         return -1;
-    }
  
     sf::Text playerTurnText;
     playerTurnText.setFont(font);
@@ -47,8 +45,19 @@ int main()
     label.setCharacterSize(16);
     label.setFillColor(sf::Color::White);
  
-    bool playerTurn = true;
-    bool gameOver = false;
+    sf::Text menuText;
+    menuText.setFont(font);
+    menuText.setCharacterSize(22);
+    menuText.setFillColor(sf::Color::Cyan);
+    menuText.setPosition(30, 50);
+    menuText.setString(
+        "WELCOME TO BATTLESHIP\n\n"
+        "How to Play:\n"
+        "- Click on the grid to fire shots at your opponent\n"
+        "- Red squares are hits, grey squares are misses\n"
+        "- Sink all enemy ships to win!\n\n"
+        "Player 1 and Player 2 take turns, Turns switches automatically after each turn \n"
+        "\nClick anywhere to start...");
  
     while (window.isOpen())
     {
@@ -60,9 +69,25 @@ int main()
  
             if (event.type == sf::Event::MouseButtonPressed)
             {
+                if (showMenu) 
+                {
+                    showMenu = false;
+                 
+                 game = Battleship();
+                
+                 game.randomlyPlaceShips(game.playerBoard);
+                 
+                 game.randomlyPlaceShips(game.computerBoard);
+                 
+                 gameOver = false;
+                 
+                 playerTurn = true;
+                 
+                 continue;
+                }
+ 
                 if (gameOver)
                 {
-                    // Restart game
                     game = Battleship();
                     game.randomlyPlaceShips(game.playerBoard);
                     game.randomlyPlaceShips(game.computerBoard);
@@ -104,12 +129,18 @@ int main()
             }
         }
  
+        window.clear(sf::Color::Black);
+ 
+        if (showMenu)
+        {
+            window.draw(menuText);
+            window.display();
+            continue;
+        }
+ 
         if (!gameOver)
             playerTurnText.setString(playerTurn ? "Player 1's Turn" : "Player 2's Turn");
  
-        window.clear(sf::Color::Black);
- 
-        // Draw board
         for (int i = 0; i < BOARD_SIZE; ++i)
         {
             for (int j = 0; j < BOARD_SIZE; ++j)
@@ -128,7 +159,6 @@ int main()
             }
         }
  
-        // Draw row/column labels
         for (int j = 0; j < BOARD_SIZE; ++j)
         {
             label.setString(std::to_string(j));
