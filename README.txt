@@ -5,6 +5,7 @@ Team Members:
 
 Instructions:
 - Sink all 5 enemy ships to win.
+- After turn player switches automatically after turn 
 - Red = Hit, Gray = Miss.
 
 Video Demo: https://youtu.be/your-demo-link
