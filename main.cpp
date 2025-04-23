@@ -12,7 +12,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(CELL_SIZE * BOARD_SIZE, CELL_SIZE * BOARD_SIZE), "Battleship - SFML");
 
     window.setFramerateLimit(60);
-    
+
     sf::RectangleShape cell(sf::Vector2f(CELL_SIZE, CELL_SIZE));
     cell.setOutlineThickness(1);
     cell.setOutlineColor(sf::Color::White);
@@ -96,11 +96,11 @@ int main()
         }
 
         window.display();
-
     }
 
     game.outputStats("Player", game.playerStats);
     game.outputStats("Computer", game.computerStats);
+
     return 0;
 }
 
