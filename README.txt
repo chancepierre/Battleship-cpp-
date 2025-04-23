@@ -4,6 +4,7 @@ Team Members:
 - Kwado Afriyie, Section 10
 Game:
 -Battleship with multiplayer
+-Randomly placed ships
 -Arial font added for easier understanding of board
 -Menu at start of game
 Instructions:
