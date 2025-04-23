@@ -8,4 +8,4 @@ Instructions:
 - After turn player switches automatically after turn 
 - Red = Hit, Gray = Miss.
 
-Video Demo: https://youtu.be/your-demo-link
+Added a file font for into our file for code to read and display from 
