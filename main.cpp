@@ -8,8 +8,8 @@ int main()
     Battleship game;
 
     // Randomly place ships for both players
-    game.randomlyPlaceShips(game.playerOneBoard);  // Player 1
-    game.randomlyPlaceShips(game.playerTwoBoard);  // Player 2
+    game.randomlyPlaceShips(game.playerBoard);  // Player 1
+    game.randomlyPlaceShips(game.computerBoard);  // Player 2
     std::cout << "Ships placed randomly for both players.\n";
 
     sf::RenderWindow window(sf::VideoMode(CELL_SIZE * BOARD_SIZE, CELL_SIZE * BOARD_SIZE), "Battleship - Player vs Player");
@@ -41,20 +41,20 @@ int main()
                     bool hit;
                     if (playerOneTurn)
                     {
-                        hit = game.checkShot(game.playerTwoBoard, game.playerOneStats, row, col);
+                        hit = game.checkShot(game.computerBoard, game.playerStats, row, col);
                         game.outputCurrentMove(row, col, hit, "Player 1");
 
-                        if (game.isWinner(game.playerOneStats)) {
+                        if (game.isWinner(game.playerStats)) {
                             std::cout << "Player 1 wins!" << std::endl;
                             gameOver = true;
                         }
                     }
                     else
                     {
-                        hit = game.checkShot(game.playerOneBoard, game.playerTwoStats, row, col);
+                        hit = game.checkShot(game.playerBoard, game.computerStats, row, col);
                         game.outputCurrentMove(row, col, hit, "Player 2");
 
-                        if (game.isWinner(game.playerTwoStats)) {
+                        if (game.isWinner(game.computerStats)) {
                             std::cout << "Player 2 wins!" << std::endl;
                             gameOver = true;
                         }
@@ -74,7 +74,7 @@ int main()
                 cell.setPosition(j * CELL_SIZE, i * CELL_SIZE);
 
                 // Show the current player's target board
-                char val = playerOneTurn ? game.playerTwoBoard[i][j] : game.playerOneBoard[i][j];
+                char val = playerOneTurn ? game.computerBoard[i][j] : game.playerBoard[i][j];
 
                 if (val == '*')
                     cell.setFillColor(sf::Color::Red);
@@ -90,8 +90,8 @@ int main()
         window.display();
     }
 
-    game.outputStats("Player 1", game.playerOneStats);
-    game.outputStats("Player 2", game.playerTwoStats);
+    game.outputStats("Player 1", game.playerStats);
+    game.outputStats("Player 2", game.computerStats);
 
     return 0;
 }
