@@ -3,6 +3,51 @@
 
 const int CELL_SIZE = 50;
 
+void displayStats(sf::RenderWindow &window, const Stats &playerStats, const Stats &computerStats, const std::string &winner)
+{
+    sf::Font font;
+    if (!font.loadFromFile("arial.ttf"))
+        return;
+
+    sf::Text statsText;
+    statsText.setFont(font);
+    statsText.setCharacterSize(20);
+    statsText.setFillColor(sf::Color::White);
+    statsText.setPosition(20, 20);
+
+    std::stringstream ss;
+    ss << winner << " Wins!\n\n";
+    ss << "Player Stats:\n";
+    ss << "Hits: " << playerStats.hits << "\nMisses: " << playerStats.misses << "\nShots: " << playerStats.shots
+       << "\nAccuracy: " << (playerStats.shots > 0 ? (100.f * playerStats.hits / playerStats.shots) : 0) << "%\n\n";
+
+    ss << "Computer Stats:\n";
+    ss << "Hits: " << computerStats.hits << "\nMisses: " << computerStats.misses << "\nShots: " << computerStats.shots
+       << "\nAccuracy: " << (computerStats.shots > 0 ? (100.f * computerStats.hits / computerStats.shots) : 0) << "%\n\n";
+
+    ss << "Press any key to exit.";
+
+    statsText.setString(ss.str());
+
+    window.clear(sf::Color::Black);
+    window.draw(statsText);
+    window.display();
+
+    sf::Event event;
+    bool waiting = true;
+    while (waiting && window.isOpen())
+    {
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed || event.type == sf::Event::MouseButtonPressed)
+            {
+                waiting = false;
+                window.close();
+            }
+        }
+    }
+}
+
 int main()
 {
     Battleship game;
@@ -96,11 +141,13 @@ int main()
         }
 
         window.display();
+
+        if (gameOver)
     }
 
     game.outputStats("Player", game.playerStats);
     game.outputStats("Computer", game.computerStats);
-
+    displayStats(window, game.playerStats, game.computerStats, winner);
     return 0;
 }
 
