@@ -19,7 +19,7 @@ int main()
     cell.setOutlineThickness(1);
     cell.setOutlineColor(sf::Color::White);
 
-    bool playerOneTurn = true;
+    bool playerTurn = true;
     bool gameOver = false;
 
     while (window.isOpen())
@@ -39,7 +39,7 @@ int main()
                 if (row < BOARD_SIZE && col < BOARD_SIZE)
                 {
                     bool hit;
-                    if (playerOneTurn)
+                    if (playerTurn)
                     {
                         hit = game.checkShot(game.computerBoard, game.playerStats, row, col);
                         game.outputCurrentMove(row, col, hit, "Player 1");
@@ -60,7 +60,7 @@ int main()
                         }
                     }
 
-                    playerOneTurn = !playerOneTurn;
+                    playerTurn = !playerTurn;
                 }
             }
         }
@@ -74,7 +74,7 @@ int main()
                 cell.setPosition(j * CELL_SIZE, i * CELL_SIZE);
 
                 // Show the current player's target board
-                char val = playerOneTurn ? game.computerBoard[i][j] : game.playerBoard[i][j];
+                char val = playerTurn ? game.computerBoard[i][j] : game.playerBoard[i][j];
 
                 if (val == '*')
                     cell.setFillColor(sf::Color::Red);
