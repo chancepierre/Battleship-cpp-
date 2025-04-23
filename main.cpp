@@ -97,12 +97,10 @@ int main()
 
         window.display();
 
-        if (gameOver)
     }
 
     game.outputStats("Player", game.playerStats);
     game.outputStats("Computer", game.computerStats);
-    displayStats(window, game.playerStats, game.computerStats, winner);
     return 0;
 }
 
