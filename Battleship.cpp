@@ -1,4 +1,4 @@
-#include "Battleship.h"
+#include "Battleship.hpp"
 
 Battleship::Battleship() : playerBoard(BOARD_SIZE, std::vector<char>(BOARD_SIZE, '-')),
 computerBoard(BOARD_SIZE, std::vector<char>(BOARD_SIZE, '-')),
