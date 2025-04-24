@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class Battleship; 
+class Battleship; // Forward declaration
 
 class Player {
 public:
