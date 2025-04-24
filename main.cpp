@@ -17,14 +17,6 @@ int main()
     cell.setOutlineThickness(1);
     cell.setOutlineColor(sf::Color::White);
 
-    sf::Texture shipTexture;
-    if (!shipTexture.loadFromFile("images/ship.png")) {
-        std::cerr << "Failed to load ship.png\n";
-        return -1;
-    }
-    sf::Sprite shipSprite;
-    shipSprite.setScale(1.f, 1.f);
-
     sf::Font font;
     if (!font.loadFromFile("arial.ttf"))
         return -1;
@@ -64,8 +56,7 @@ int main()
         "- Click on the grid to fire shots at your opponent\n"
         "- Red squares are hits, grey squares are misses\n"
         "- Sink all enemy ships to win!\n\n"
-        "Player 1 and Player 2 take turns.\n"
-        "Turns switch automatically after each shot.\n"
+        "Player 1 and Player 2 take turns, Turns switches automatically after each turn \n"
         "\nClick anywhere to start...");
 
     while (window.isOpen())
@@ -81,11 +72,17 @@ int main()
                 if (showMenu)
                 {
                     showMenu = false;
+
                     game = Battleship();
+
                     game.randomlyPlaceShips(game.playerBoard);
+
                     game.randomlyPlaceShips(game.computerBoard);
+
                     gameOver = false;
+
                     playerTurn = true;
+
                     continue;
                 }
 
@@ -148,28 +145,17 @@ int main()
         {
             for (int j = 0; j < BOARD_SIZE; ++j)
             {
+                cell.setPosition(j * CELL_SIZE, i * CELL_SIZE);
                 char val = playerTurn ? game.computerBoard[i][j] : game.playerBoard[i][j];
 
-                if (val == '*') {
+                if (val == '*')
                     cell.setFillColor(sf::Color::Red);
-                    cell.setPosition(j * CELL_SIZE, i * CELL_SIZE);
-                    window.draw(cell);
-                }
-                else if (val == 'm') {
+                else if (val == 'm')
                     cell.setFillColor(sf::Color(128, 128, 128));
-                    cell.setPosition(j * CELL_SIZE, i * CELL_SIZE);
-                    window.draw(cell);
-                }
-                else if (val != '-') {
-                    shipSprite.setPosition(j * CELL_SIZE, i * CELL_SIZE);
-                    shipSprite.setTexture(shipTexture);
-                    window.draw(shipSprite);
-                }
-                else {
+                else
                     cell.setFillColor(sf::Color::Blue);
-                    cell.setPosition(j * CELL_SIZE, i * CELL_SIZE);
-                    window.draw(cell);
-                }
+
+                window.draw(cell);
             }
         }
 
