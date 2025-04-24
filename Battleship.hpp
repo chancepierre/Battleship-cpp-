@@ -1,3 +1,4 @@
+#pragma once
 #include "libraries.hpp"
 #include "shipfleet.hpp"
 
