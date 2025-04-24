@@ -30,69 +30,43 @@ Passed
 
 Test Case 2 – Miss Detection
 Description: Player 2 fires at a cell that contains no ship.
-
 Steps:
-
 Player 2 clicks a known empty cell (e.g., (9,9)).
-
 Expected Outcome:
-
 Message “Miss.” is printed
-
 Cell color changes to gray
-
 Player 2’s miss count increases
-
 Actual Outcome:
 Passed
 
 Test Case 3 – Double Shot Prevention
 Description: Game prevents shooting the same cell twice.
-
 Steps:
-
 Player 1 clicks cell (3,3).
-
 Player 1 clicks cell (3,3) again.
-
 Expected Outcome:
-
 Message “Already targeted!” is printed
-
 Stats are not updated
-
 Cell appearance remains the same
-
 Actual Outcome:
 Passed
 
 Test Case 4 – Win Detection
 Description: Game ends when all ships of one player are sunk.
-
 Steps:
-
 Player 1 hits all 17 ship cells of Player 2.
-
 Expected Outcome:
-
 Message “Player 1 Wins!” appears
-
 Game no longer accepts input
-
 Player 1’s hits equal 17
-
 Actual Outcome:
 Passed
 
 Test Case 5 – Game Restart
 Description: Clicking after a game ends starts a new game.
-
 Steps:
-
 Complete a game until someone wins.
-
 Click anywhere to trigger restart.
-
 Expected Outcome:
 New ships placed for both players
 All stats reset to zero
