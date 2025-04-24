@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Battleship.hpp"
+#include "Player.hpp"
 
 const int CELL_SIZE = 50;
 
@@ -10,6 +11,9 @@ int main()
     bool playerTurn = true;
     bool gameOver = false;
 
+    HumanPlayer1 p1;
+    HumanPlayer2 p2;
+
     sf::RenderWindow window(sf::VideoMode(CELL_SIZE * BOARD_SIZE, CELL_SIZE * BOARD_SIZE + 100), "Battleship - Player vs Player");
     window.setFramerateLimit(60);
 
@@ -18,7 +22,7 @@ int main()
     cell.setOutlineColor(sf::Color::White);
 
     sf::Font font;
-    if (!font.loadFromFile("arial.ttf"))
+    if (!font.loadFromFile("fonts/arial.ttf"))
         return -1;
 
     sf::Text playerTurnText;
@@ -56,7 +60,8 @@ int main()
         "- Click on the grid to fire shots at your opponent\n"
         "- Red squares are hits, grey squares are misses\n"
         "- Sink all enemy ships to win!\n\n"
-        "Player 1 and Player 2 take turns, Turns switches automatically after each turn \n"
+        "Player 1 and Player 2 take turns.\n"
+        "Turns switch automatically after each shot.\n"
         "\nClick anywhere to start...");
 
     while (window.isOpen())
@@ -72,17 +77,11 @@ int main()
                 if (showMenu)
                 {
                     showMenu = false;
-
                     game = Battleship();
-
                     game.randomlyPlaceShips(game.playerBoard);
-
                     game.randomlyPlaceShips(game.computerBoard);
-
                     gameOver = false;
-
                     playerTurn = true;
-
                     continue;
                 }
 
@@ -102,27 +101,10 @@ int main()
 
                 if (row < BOARD_SIZE && col < BOARD_SIZE)
                 {
-                    bool hit;
                     if (playerTurn)
-                    {
-                        hit = game.checkShot(game.computerBoard, game.playerStats, row, col);
-                        game.outputCurrentMove(row, col, hit, "Player 1");
-
-                        if (game.isWinner(game.playerStats)) {
-                            winnerText.setString("Player 1 Wins!");
-                            gameOver = true;
-                        }
-                    }
+                        p1.takeTurn(game, row, col, gameOver, winnerText);
                     else
-                    {
-                        hit = game.checkShot(game.playerBoard, game.computerStats, row, col);
-                        game.outputCurrentMove(row, col, hit, "Player 2");
-
-                        if (game.isWinner(game.computerStats)) {
-                            winnerText.setString("Player 2 Wins!");
-                            gameOver = true;
-                        }
-                    }
+                        p2.takeTurn(game, row, col, gameOver, winnerText);
 
                     playerTurn = !playerTurn;
                 }
