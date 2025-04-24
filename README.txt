@@ -1,7 +1,7 @@
 Video Demo: https://youtube.com/shorts/DdxeVWeGm_4?si=UE5CaM7y9O-Y7Y_I
 
 Team Members:
-- Chance Pierre, Section 12
+- Chance Shungu, Section 12
 - Joshua Leon Ortiz, Section 11
 - Kwado Afriyie, Section 10
 Game:
