@@ -1,11 +1,20 @@
 #include <SFML/Graphics.hpp>
 #include "Battleship.hpp"
 #include "Player.hpp"
+#include "testFunctions.hpp"
 
 const int CELL_SIZE = 50;
 
 int main()
 {
+    //test functions
+    testHitDetection();
+    testMissDetection();
+    testDoubleShotPrevention();
+    testWinDetection();
+    testGameRestart();
+
+   
     Battleship game;
     bool showMenu = true;
     bool playerTurn = true;
@@ -51,9 +60,9 @@ int main()
 
     sf::Text menuText;
     menuText.setFont(font);
-    menuText.setCharacterSize(22);
+    menuText.setCharacterSize(16);
     menuText.setFillColor(sf::Color::Cyan);
-    menuText.setPosition(30, 50);
+    menuText.setPosition(20, 50);
     menuText.setString(
         "WELCOME TO BATTLESHIP\n\n"
         "How to Play:\n"
