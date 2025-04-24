@@ -4,6 +4,22 @@
 Ship::Ship(string ship_name, int ship_size) : name(ship_name), size(ship_size), hits(0) {}
 
 
+
+
+
+int	Ship::getSize()const
+{
+	return size;
+}
+std::string Ship::getName()const
+{
+	return name;
+}
+
+vector<pair<int,int>> Ship::getCoordinates()const
+{
+	return coordinates;
+}
 void Ship::placeShip(int x_start, int y_start, bool horizontal)
 {
 	coordinates.clear();
