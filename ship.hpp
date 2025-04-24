@@ -12,11 +12,14 @@ public:
 	virtual bool isSunk()const;
 	virtual bool isHit(int x, int y);
 
+	int	getSize()const;
+	std::string getName()const;
+	vector<pair<int, int>> getCoordinates()const;
 
 protected:
 	string name;
 	int size;
 	int hits;
-	vector<std::pair<int, int>> coordinates;
+	vector<pair<int, int>> coordinates;
 
 };
