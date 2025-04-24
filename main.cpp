@@ -22,7 +22,7 @@ int main()
     cell.setOutlineColor(sf::Color::White);
 
     sf::Font font;
-    if (!font.loadFromFile("fonts/arial.ttf"))
+    if (!font.loadFromFile("arial.ttf"))
         return -1;
 
     sf::Text playerTurnText;
